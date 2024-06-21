@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="st_btn1">
+        <item name="android:fontFamily">@font/jost</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:letterSpacing">-0.0005</item>
+        <!-- Otros atributos de estilo si es necesario -->
+    </style>
+
+    <style name="st_btn2">
+        <item name="android:fontFamily">@font/jost</item>
+        <item name="android:textColor">@color/celeste</item>
+        <item name="android:textSize">30sp</item>
+        <!-- Otros atributos de estilo si es necesario -->
+    </style>
+</resources>
