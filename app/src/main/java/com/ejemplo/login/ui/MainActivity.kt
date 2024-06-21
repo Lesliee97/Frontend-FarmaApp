@@ -10,14 +10,16 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.ejemplo.login.R
 import com.ejemplo.login.io.response.ApiService
 import com.ejemplo.login.io.response.LoginRequest
 import com.ejemplo.login.io.response.LoginResponse
-import com.ejemplo.login.service.RetrofitClient
+import com.ejemplo.login.service.AuthService
 import com.ejemplo.login.util.PreferenceHelper
 import com.ejemplo.login.util.PreferenceHelper.get
 import com.ejemplo.login.util.PreferenceHelper.set
+import com.example.app.RetrofitClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -74,23 +76,32 @@ class MainActivity : AppCompatActivity() {
         preferences["token"] = token
     }
 
-    private fun performLogin(){
+    private fun performLogin() {
         val txt_dni = findViewById<EditText>(R.id.txt_dni).text.toString()
         val txt_password = findViewById<EditText>(R.id.txt_password).text.toString()
-        //val call = apiService.postLogin(LoginRequest(txt_dni,txt_password))
-        GlobalScope.launch (Dispatchers.IO) {
+
+        lifecycleScope.launch(Dispatchers.IO) {
             try {
-                val response=RetrofitClient.instance.postLogin(LoginRequest(txt_dni,txt_password))
-                withContext(Dispatchers.Main){
-                    //Toast.makeText(this@MainActivity,"token: ${response.token}",Toast.LENGTH_SHORT).show()
-                    goToMenu()
+                val response = RetrofitClient.getInstance(this@MainActivity).postLogin(LoginRequest(txt_dni, txt_password))
+                withContext(Dispatchers.Main) {
+                    if (response.token != null) {
+                        val token = response.token
+                        if (token != null) {
+                            AuthService.saveToken(this@MainActivity, token)
+                            Toast.makeText(this@MainActivity, "Token: $token", Toast.LENGTH_SHORT).show()
+                            goToMenu()
+                        } else {
+                            Toast.makeText(this@MainActivity, "Error: No token received", Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        Toast.makeText(this@MainActivity, "Error: ${response}", Toast.LENGTH_SHORT).show()
+                    }
                 }
-            }catch (e:Exception){
-                withContext(Dispatchers.Main){
-                    Toast.makeText(this@MainActivity,"Error: ${e.message}",Toast.LENGTH_SHORT).show()
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(this@MainActivity, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
             }
         }
-
     }
 }

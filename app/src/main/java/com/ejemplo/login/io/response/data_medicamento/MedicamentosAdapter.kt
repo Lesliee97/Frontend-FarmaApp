@@ -12,9 +12,9 @@ import com.ejemplo.login.vieww.Productos
 
 class MedicamentosAdapter : RecyclerView.Adapter<MedicamentosAdapter.MedicamentoViewHolder>()  {
 
-    private val medicamentos = mutableListOf<MedicamentosRequest>()
+    private val medicamentos = mutableListOf<MedicamentosResponse>()
 
-    fun addAll(medicamentos:List<MedicamentosRequest>){
+    fun addAll(medicamentos:List<MedicamentosResponse>){
         this.medicamentos.addAll(medicamentos)
         notifyDataSetChanged()
     }
@@ -43,18 +43,18 @@ class MedicamentosAdapter : RecyclerView.Adapter<MedicamentosAdapter.Medicamento
     class MedicamentoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = TopMenuItemBinding.bind(view)
 
-        fun bind(medicamento: MedicamentosRequest) {
-            binding.tvTopMenuItemNombre.text = medicamento.nombre
-            binding.tvTopMenuItemformaFarmaceutica.text = medicamento.formaFarmaceutica
-            binding.tvTopMenuItemPrecioUnitario.text = String.format(
-                format = itemView.context.resources.getString(R.string.format_price),
-                args = arrayOf(medicamentos.precio)
-            )
-            binding.tvTopMenuItemPrecioUnitario.text = String.format(
-                format = itemView.context.resources.getString(R.string.format_price),
-                args = arrayOf(medicamentos.precio)
-            )
-            binding.tvTopMenuItemNombreCategoria.text = medicamento.formaFarmaceutica
+        fun bind(medicamento: MedicamentosResponse) {
+            //binding.tvTopMenuItemNombre.text = medicamento.nombre
+            //binding.tvTopMenuItemformaFarmaceutica.text = medicamento.formaFarmaceutica
+            //binding.tvTopMenuItemPrecioUnitario.text = String.format(
+                //format = itemView.context.resources.getString(R.string.format_price),
+                //args = arrayOf(medicamentos.precio)
+            //)
+            //binding.tvTopMenuItemPrecioUnitario.text = String.format(
+                //format = itemView.context.resources.getString(R.string.format_price),
+                //args = arrayOf(medicamentos.precio)
+            //)
+            //.tvTopMenuItemNombreCategoria.text = medicamento.formaFarmaceutica
 
         }
     }

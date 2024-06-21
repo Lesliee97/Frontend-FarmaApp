@@ -6,12 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ejemplo.login.R
 import com.ejemplo.login.databinding.FragmentInicioBinding
 import com.ejemplo.login.vieww.DataDummy
 import com.ejemplo.login.vieww.RVTopMenuAdapter
+import kotlinx.coroutines.launch
 
 class InicioFragment : Fragment() {
     /*
@@ -55,15 +57,19 @@ class InicioFragment : Fragment() {
     }
 
     private fun setRV() {
-        rvTopMenuAdapter.addAll(DataDummy.getTopMenuProductos())
+        lifecycleScope.launch {
+            val productos = DataDummy.getTopMenuProductos(requireContext())
 
-        binding.rvPizzaMenu.apply {
-            layoutManager = LinearLayoutManager(
-                requireContext(),
-                RecyclerView.HORIZONTAL,
-                false
-            )
-            adapter = rvTopMenuAdapter
+            rvTopMenuAdapter.addAll(productos)
+
+            binding.rvPizzaMenu.apply {
+                layoutManager = LinearLayoutManager(
+                    requireContext(),
+                    RecyclerView.HORIZONTAL,
+                    false
+                )
+                adapter = rvTopMenuAdapter
+            }
         }
     }
 

@@ -13,8 +13,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.ejemplo.login.R
 import com.ejemplo.login.io.response.LoginRequest
 import com.ejemplo.login.io.response.data.UserFindResponse
-import com.ejemplo.login.service.RetrofitClient
-import com.ejemplo.login.service.RetrofitClientExtern
+import com.example.app.RetrofitClientRegister
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -64,7 +63,7 @@ class RegisterActivity : AppCompatActivity() {
         val txt_dni = findViewById<EditText>(R.id.txt_dni_consulta).text.toString()
         GlobalScope.launch (Dispatchers.IO) {
             try {
-                val response= RetrofitClientExtern.instance.getUserByDni(txt_dni)
+                val response= RetrofitClientRegister.instance.getUserByDni(txt_dni)
                 withContext(Dispatchers.Main){
                     if (response != null){
                         Toast.makeText(this@RegisterActivity,"Usuario: " + response.nombres , Toast.LENGTH_SHORT).show()

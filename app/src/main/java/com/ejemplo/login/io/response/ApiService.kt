@@ -3,7 +3,7 @@ package com.ejemplo.login.io.response
 import com.ejemplo.login.io.response.data.RegisterRequest
 import com.ejemplo.login.io.response.data.RegisterResponse
 import com.ejemplo.login.io.response.data.UserFindResponse
-import com.ejemplo.login.io.response.data_medicamento.MedicamentosRequest
+import com.ejemplo.login.io.response.data_medicamento.MedicamentosResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -24,7 +24,7 @@ interface ApiService {
             UserFindResponse
 
     @GET(value="medicamentos/getAllMedicamentos")
-    suspend fun getAllMedicamentos(): List<MedicamentosRequest>
+    suspend fun getAllMedicamentos(): List<MedicamentosResponse>
 
 
 }

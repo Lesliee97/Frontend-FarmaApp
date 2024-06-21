@@ -14,7 +14,7 @@ import com.ejemplo.login.R
 import com.ejemplo.login.io.response.LoginRequest
 import com.ejemplo.login.io.response.data.RegisterRequest
 import com.ejemplo.login.io.response.data.UserFindResponse
-import com.ejemplo.login.service.RetrofitClient
+import com.example.app.RetrofitClientRegister
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -98,7 +98,7 @@ class RegistroCompletoActivity : AppCompatActivity() {
         //val call = apiService.postLogin(LoginRequest(txt_dni,txt_password))
         GlobalScope.launch (Dispatchers.IO) {
             try {
-                val response= RetrofitClient.instance.postRegister(RegisterRequest(txt_username, txt_password, txt_nombres, txt_apellidos, txt_historia, txt_celular, txt_correo))
+                val response= RetrofitClientRegister.instance.postRegister(RegisterRequest(txt_username, txt_password, txt_nombres, txt_apellidos, txt_historia, txt_celular, txt_correo))
 
                 withContext(Dispatchers.Main){
                     Toast.makeText(this@RegistroCompletoActivity,"token: ${response.toString()}",Toast.LENGTH_SHORT).show()
