@@ -1,17 +1,22 @@
 package com.ejemplo.login.frag
 
+import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewbinding.ViewBindings
 import com.ejemplo.login.R
 import com.ejemplo.login.databinding.FragmentInicioBinding
+import com.ejemplo.login.ui.MainActivity
 import com.ejemplo.login.vieww.DataDummy
+import com.ejemplo.login.vieww.ProductoDetailActivity
 import com.ejemplo.login.vieww.RVTopMenuAdapter
 import kotlinx.coroutines.launch
 
@@ -25,6 +30,7 @@ class InicioFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_inicio, container, false)
     }
     */
+    //private val PromoName = ViewBindings.findChildViewById<TextView>(R.id.)
 
     private var _binding: FragmentInicioBinding? = null
     private val binding get() = _binding!!
@@ -33,6 +39,7 @@ class InicioFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onCreateView(
@@ -54,6 +61,15 @@ class InicioFragment : Fragment() {
 
         // Set up the RecyclerView
         setRV()
+/*
+        binding.tvPizzaMenuHotPromoName.setOnClickListener {
+            val intent = Intent(requireContext(), ProductoDetailActivity::class.java)
+            startActivity(intent)
+        }
+        binding.ivPizzaMenuHotPromoPizza.setOnClickListener {
+            val intent = Intent(requireContext(), ProductoDetailActivity::class.java)
+            startActivity(intent)
+        }*/
     }
 
     private fun setRV() {
